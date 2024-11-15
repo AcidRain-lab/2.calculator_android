@@ -54,7 +54,9 @@ fun CalculatorApp() {
             when (input) {
                 "=" -> {
                     try {
-                        val expression = ExpressionBuilder(displayText).build()
+                        // Заменяем символы ÷ и × на / и *, чтобы ExpressionBuilder их распознал
+                        val expressionText = displayText.replace("÷", "/").replace("×", "*")
+                        val expression = ExpressionBuilder(expressionText).build()
                         val result = expression.evaluate()
                         displayText = result.toString()
                     } catch (e: Exception) {
